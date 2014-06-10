@@ -1,12 +1,3 @@
-#
-# Cookbook Name:: postfix
-# Recipe:: default
-#
-# Copyright (C) 2014 Logan Koester
-# 
-# All rights reserved - Do Not Redistribute
-#
-
 package('postfix') { action :install }
 
 service 'postfix' do

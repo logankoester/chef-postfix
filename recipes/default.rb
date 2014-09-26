@@ -1,5 +1,7 @@
 package('postfix') { action :install }
 
+credentials_path = '/etc/postfix/sasl_passwd'
+
 service 'postfix' do
   provider Chef::Provider::Service::Systemd if node['platform'] =~ /arch|manjaro/
   supports status: true, start: true, stop: true, restart: true, reload: true
@@ -13,15 +15,17 @@ template '/etc/postfix/main.cf' do
   variables relayhost: node[:postfix][:relayhost]
 end
 
+file credentials_path do
+  action :create
+  mode '600'
+end
+
 bash 'Configure sasl_passwd for postfix' do
-  code "echo '#{node[:postfix][:relayhost]} #{node[:postfix][:smtp][:login]}:#{node[:postfix][:smtp][:password]}' > /etc/postfix/sasl_passwd"
-end
-
-bash 'Set permissions for the sasl_passwd' do
-  code 'chmod 600 /etc/postfix/sasl_passwd'
-end
-
-bash 'Postmap the sasl_password' do
-  code 'postmap /etc/postfix/sasl_passwd'
+  credentials = "#{node[:postfix][:relayhost]} #{node[:postfix][:smtp][:login]}:#{node[:postfix][:smtp][:password]}"
+  code <<-EOH
+    echo '#{credentials}' > #{credentials_path}
+    postmap #{credentials_path}
+  EOH
+  not_if { File.exists?(credentials_path) && File.read(credentials_path).strip == credentials }
   notifies :restart, resources(:service => 'postfix')
 end

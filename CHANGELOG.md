@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+### v0.2.1
+- Adds "mynetworks_style" attribute with safe default value of "host"
+
 ### v0.2.0
 - Updates main.cf template for postfix 3.0.1
 

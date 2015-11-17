@@ -265,6 +265,10 @@ unknown_local_recipient_reject_code = 550
 #mynetworks_style = subnet
 #mynetworks_style = host
 
+<% if @mynetworks_style %>
+mynetworks_style = <%= @mynetworks_style %>
+<% end %>
+
 # Alternatively, you can specify the mynetworks list by hand, in
 # which case Postfix ignores the mynetworks_style setting.
 #

@@ -694,3 +694,26 @@ shlib_directory = /usr/lib/postfix
 smtp_sasl_auth_enable = yes
 smtp_sasl_security_options = noanonymous
 smtp_sasl_password_maps=hash:/etc/postfix/sasl_passwd
+
+# Helo Restrictions
+smtpd_delay_reject = yes
+smtpd_helo_required = yes
+
+smtpd_helo_restrictions =
+  permit_mynetworks,
+  reject_non_fqdn_helo_hostname,
+  reject_invalid_helo_hostname,
+  permit
+
+# Sender Restrictions
+smtpd_sender_restrictions =
+  permit_mynetworks,
+  reject_non_fqdn_sender,
+  reject_unknown_sender_domain,
+  permit
+
+# Relay Restrictions
+smtpd_relay_restrictions =
+  permit_mynetworks,
+  permit_sasl_authenticated,
+  reject_unauth_destination

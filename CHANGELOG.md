@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.3.0
+- Adds inet_interfaces attribute with default value of 'loopback-only
+- Adds some default helo, sender and relay restrictions to the template
+
 ### v0.2.1
 - Adds "mynetworks_style" attribute with safe default value of "host"
 

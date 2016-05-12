@@ -13,9 +13,6 @@ template '/etc/postfix/main.cf' do
   source 'main.cf.erb'
   notifies :reload, resources(:service => 'postfix')
   variables relayhost: node[:postfix][:relayhost]
-  variables mynetworks_style: node[:postfix][:mynetworks_style]
-  variables mynetworks: node[:postfix][:mynetworks]
-  variables inet_interfaces: node[:postfix][:inet_interfaces]
 end
 
 file credentials_path do

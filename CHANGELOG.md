@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.3.1
+- Adds mynetworks attribute
+- Fixes ignored inet_interfaces attribute
+
 ### v0.3.0
 - Adds inet_interfaces attribute with default value of 'loopback-only
 - Adds some default helo, sender and relay restrictions to the template

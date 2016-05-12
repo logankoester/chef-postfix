@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+### v0.3.2
+- Simplifies attributes by hardcoding some defaults into the template
+
 ### v0.3.1
 - Adds mynetworks attribute
 - Fixes ignored inet_interfaces attribute
